@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: contentking-v9
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: TEXT_MODEL
+        value: gpt-5.6-luna
+      - key: IMAGE_MODEL
+        value: gpt-image-2
+      - key: TZ
+        value: Europe/Berlin
+      - key: AUTO_PUBLISH
+        value: "false"
