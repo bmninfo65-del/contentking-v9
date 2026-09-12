@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ContentKing V9</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#101426,#26345a);color:#fff;min-height:100vh}
+.wrap{max-width:900px;margin:auto;padding:28px}.card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:22px;padding:26px;backdrop-filter:blur(12px);box-shadow:0 20px 60px #0004}
+h1{margin-top:0}label{display:block;margin:16px 0 8px}input,select,button{width:100%;box-sizing:border-box;padding:14px;border-radius:12px;border:0;font-size:16px}button{margin-top:20px;background:#fff;color:#17213c;font-weight:bold;cursor:pointer}.result{margin-top:24px;background:#fff;color:#182039;border-radius:16px;padding:20px}small{opacity:.75}
+</style></head><body><div class="wrap"><div class="card"><h1>👑 ContentKing V9</h1><p>AI-студия для подготовки контента. Демо-версия.</p>
+<form method="post" action="/generate"><label>Тема статьи</label><input name="topic" placeholder="Например: как экономить время" required><label>Стиль</label><select name="tone"><option value="expert">Экспертный</option><option value="simple">Простой</option><option value="story">История</option></select><button>Создать черновик</button></form>
+{% if result %}<div class="result"><h2>{{ result.title }}</h2><p><b>{{ result.intro }}</b></p><p>{{ result.body }}</p><small>Это демонстрационный черновик. Автопубликация в Дзен отключена.</small></div>{% endif %}
+</div></div></body></html>
