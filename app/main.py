@@ -124,3 +124,28 @@ def stop(mid):
     c=conn(); c.execute("UPDATE missions SET status='stopping' WHERE id=? AND status IN ('queued','running')",(mid,)); c.commit(); c.close()
     event(mid,"COMMANDER","Stop requested by user.")
     return get(mid)
+from fastapi import FastAPI, Form, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
+app = FastAPI(title="ContentKing V9")
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/api/health")
+def health():
+    return {"status": "ok", "app": "ContentKing V9"}
+
+@app.get("/", response_class=HTMLResponse)
+def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request, "result": None})
+
+@app.post("/generate", response_class=HTMLResponse)
+def generate(request: Request, topic: str = Form(...), tone: str = Form("expert")):
+    topic = topic.strip()
+    result = {
+        "title": f"{topic}: практический разбор",
+        "intro": f"В этой демо-версии ContentKing подготовлен черновик материала на тему «{topic}».",
+        "body": "Здесь будет размещён основной текст статьи. Подключение AI-модели можно выполнить через переменную OPENAI_API_KEY после настройки сервиса.",
+        "tone": tone,
+    }
+    return templates.TemplateResponse("index.html", {"request": request, "result": result})
